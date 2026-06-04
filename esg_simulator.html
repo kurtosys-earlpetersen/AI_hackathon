@@ -1,0 +1,2382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Interactive ESG &amp; Carbon Impact Simulator</title>
+<style>
+  @font-face { font-family: "Inter"; src: url("Inter/Inter_18pt/Inter_24pt-Thin.ttf") format("truetype"); font-weight: 100; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Inter"; src: url("Inter/Inter_18pt/Inter_24pt-ThinItalic.ttf") format("truetype"); font-weight: 100; font-style: italic; font-display: swap; }
+  @font-face { font-family: "Inter"; src: url("Inter/Inter_18pt/Inter_24pt-ExtraLight.ttf") format("truetype"); font-weight: 200; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Inter"; src: url("Inter/Inter_18pt/Inter_24pt-ExtraLightItalic.ttf") format("truetype"); font-weight: 200; font-style: italic; font-display: swap; }
+  @font-face { font-family: "Inter"; src: url("Inter/Inter_18pt/Inter_24pt-Light.ttf") format("truetype"); font-weight: 300; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Inter"; src: url("Inter/Inter_18pt/Inter_24pt-LightItalic.ttf") format("truetype"); font-weight: 300; font-style: italic; font-display: swap; }
+  @font-face { font-family: "Inter"; src: url("Inter/Inter_18pt/Inter_24pt-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Inter"; src: url("Inter/Inter_18pt/Inter_24pt-Italic.ttf") format("truetype"); font-weight: 400; font-style: italic; font-display: swap; }
+  @font-face { font-family: "Inter"; src: url("Inter/Inter_18pt/Inter_24pt-Medium.ttf") format("truetype"); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Inter"; src: url("Inter/Inter_18pt/Inter_24pt-MediumItalic.ttf") format("truetype"); font-weight: 500; font-style: italic; font-display: swap; }
+  @font-face { font-family: "Inter"; src: url("Inter/Inter_18pt/Inter_24pt-SemiBold.ttf") format("truetype"); font-weight: 600; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Inter"; src: url("Inter/Inter_18pt/Inter_24pt-SemiBoldItalic.ttf") format("truetype"); font-weight: 600; font-style: italic; font-display: swap; }
+  @font-face { font-family: "Inter"; src: url("Inter/Inter_18pt/Inter_24pt-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Inter"; src: url("Inter/Inter_18pt/Inter_24pt-BoldItalic.ttf") format("truetype"); font-weight: 700; font-style: italic; font-display: swap; }
+  @font-face { font-family: "Inter"; src: url("Inter/Inter_18pt/Inter_24pt-ExtraBold.ttf") format("truetype"); font-weight: 800; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Inter"; src: url("Inter/Inter_18pt/Inter_24pt-ExtraBoldItalic.ttf") format("truetype"); font-weight: 800; font-style: italic; font-display: swap; }
+  @font-face { font-family: "Inter"; src: url("Inter/Inter_18pt/Inter_24pt-Black.ttf") format("truetype"); font-weight: 900; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Inter"; src: url("Inter/Inter_18pt/Inter_24pt-BlackItalic.ttf") format("truetype"); font-weight: 900; font-style: italic; font-display: swap; }
+
+  @font-face { font-family: "Sharp Grotesk"; src: url("Sharp Grotesk/Sharp_Grotest_18/Thin18.otf") format("opentype"); font-weight: 100; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Sharp Grotesk"; src: url("Sharp Grotesk/Sharp_Grotest_18/ThinItalic18.otf") format("opentype"); font-weight: 100; font-style: italic; font-display: swap; }
+  @font-face { font-family: "Sharp Grotesk"; src: url("Sharp Grotesk/Sharp_Grotest_18/Light18.otf") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Sharp Grotesk"; src: url("Sharp Grotesk/Sharp_Grotest_18/LightItalic18.otf") format("opentype"); font-weight: 300; font-style: italic; font-display: swap; }
+  @font-face { font-family: "Sharp Grotesk"; src: url("Sharp Grotesk/Sharp_Grotest_18/Book18.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Sharp Grotesk"; src: url("Sharp Grotesk/Sharp_Grotest_18/Italic18.otf") format("opentype"); font-weight: 400; font-style: italic; font-display: swap; }
+  @font-face { font-family: "Sharp Grotesk"; src: url("Sharp Grotesk/Sharp_Grotest_18/Medium18.otf") format("opentype"); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Sharp Grotesk"; src: url("Sharp Grotesk/Sharp_Grotest_18/MediumItalic18.otf") format("opentype"); font-weight: 500; font-style: italic; font-display: swap; }
+  @font-face { font-family: "Sharp Grotesk"; src: url("Sharp Grotesk/Sharp_Grotest_18/SemiBold18.otf") format("opentype"); font-weight: 600; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Sharp Grotesk"; src: url("Sharp Grotesk/Sharp_Grotest_18/SemiBoldItalic18.otf") format("opentype"); font-weight: 600; font-style: italic; font-display: swap; }
+  @font-face { font-family: "Sharp Grotesk"; src: url("Sharp Grotesk/OTF-Mac/Bold18.otf") format("opentype"), url("Sharp Grotesk/Sharp_Grotest_18/Bold18.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Sharp Grotesk"; src: url("Sharp Grotesk/Sharp_Grotest_18/BoldItalic18.otf") format("opentype"); font-weight: 700; font-style: italic; font-display: swap; }
+  @font-face { font-family: "Sharp Grotesk"; src: url("Sharp Grotesk/Sharp_Grotest_18/Black18.otf") format("opentype"); font-weight: 900; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Sharp Grotesk"; src: url("Sharp Grotesk/Sharp_Grotest_18/BlackItalic18.otf") format("opentype"); font-weight: 900; font-style: italic; font-display: swap; }
+
+  :root {
+    --navy: #001e42;
+    --blue: #005eb8;
+    --action-blue: #0072ce;
+    --blue-tint: #eaf4ff;
+    --bg: #f7f9fb;
+    --surface: #ffffff;
+    --surface-soft: #f2f6fa;
+    --border: #d8e0e8;
+    --border-strong: #b7c4d1;
+    --text: #1f2933;
+    --text-muted: #5d6b7a;
+    --text-light: #748397;
+    --positive: #2e7d5b;
+    --warning: #b7791f;
+    --risk: #b42318;
+    --shadow: 0 18px 45px rgba(0, 30, 66, 0.08);
+    --radius: 0.5rem;
+    --heading: "Sharp Grotesk", "Arial Narrow", Arial, "Helvetica Neue", sans-serif;
+    --body: "Inter", Arial, "Helvetica Neue", sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      linear-gradient(180deg, rgba(247, 249, 251, 0.88) 0%, rgba(247, 249, 251, 0.96) 420px, rgba(247, 249, 251, 0.98) 100%),
+      linear-gradient(90deg, rgba(0, 30, 66, 0.08), rgba(0, 94, 184, 0.03)),
+      url("Aerial Road Photo.jpg") center top / cover fixed,
+      var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
+  }
+
+  button,
+  input,
+  select { font: inherit; }
+
+  .page {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 28px 28px 56px;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 18px 0 24px;
+    border-bottom: 1px solid rgba(0, 30, 66, 0.14);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--navy);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .brand-logo {
+    display: block;
+    width: clamp(138px, 20.4vw, 252px);
+    height: auto;
+  }
+
+  .brand small {
+    display: block;
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .meta-pill {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.72);
+    color: var(--text-muted);
+    padding: 9px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(340px, 0.9fr);
+    gap: 42px;
+    padding: 58px 0 42px;
+    align-items: end;
+  }
+
+  .eyebrow,
+  .panel-kicker,
+  .metric-label,
+  .label {
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  h1,
+  h2,
+  h3,
+  .hero-stat strong,
+  .metric-value,
+  .impact-number,
+  .meter-text,
+  .temp-value,
+  .donut-center-label strong,
+  .comparison-table strong {
+    color: var(--navy);
+    font-family: var(--heading);
+    font-feature-settings: "kern";
+    line-height: 1.02;
+    margin: 0;
+  }
+
+  h1 {
+    max-width: 840px;
+    font-size: clamp(42px, 6vw, 82px);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  .title-amp {
+    font-family: inherit;
+    font-size: 1em;
+    font-style: normal;
+    font-weight: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    vertical-align: baseline;
+  }
+
+  h2 {
+    font-size: clamp(28px, 3.4vw, 44px);
+    font-weight: 500;
+    letter-spacing: 0.012em;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0.015em;
+  }
+
+  p { margin: 0; }
+
+  .hero-copy {
+    max-width: 660px;
+    margin-top: 22px;
+    color: var(--text-muted);
+    font-size: 18px;
+  }
+
+  .hero-card,
+  .panel,
+  .metric-card,
+  .context-card {
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 10px 30px rgba(0, 30, 66, 0.05);
+    backdrop-filter: blur(4px);
+  }
+
+  .hero-card { padding: 24px; box-shadow: var(--shadow); }
+
+  .hero-card-title,
+  .hero-stat,
+  .panel-header {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-card-title {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 18px;
+    color: var(--navy);
+    font-weight: 800;
+  }
+
+  .hero-stat {
+    padding: 18px 0;
+  }
+
+  .hero-stat:last-child { border-bottom: 0; padding-bottom: 0; }
+  .hero-stat span { display: block; color: var(--text-muted); font-size: 13px; }
+  .hero-stat strong { display: block; font-size: 30px; font-weight: 500; letter-spacing: 0.012em; }
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(320px, 390px) minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+    margin-bottom: 48px;
+  }
+
+  .panel-pad,
+  .context-card { padding: 24px; }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 20px;
+    padding-bottom: 18px;
+  }
+
+  .panel-note,
+  .metric-detail,
+  .context-card p,
+  .context-card li {
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  .panel-note { margin-top: 8px; }
+
+  .field {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .field label,
+  .field .label {
+    color: var(--navy);
+  }
+
+  .amount-wrap {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    background: var(--surface);
+    min-height: 58px;
+  }
+
+  .currency-prefix {
+    color: var(--text-muted);
+    padding-left: 16px;
+    font-weight: 700;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    min-height: 56px;
+    border: 0;
+    background: transparent;
+    color: var(--text);
+    padding: 0 14px 0 8px;
+    outline: none;
+  }
+
+  select {
+    width: 100%;
+    min-height: 56px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text);
+    padding: 0 42px 0 14px;
+    outline: none;
+    appearance: none;
+    background-image:
+      linear-gradient(45deg, transparent 50%, var(--navy) 50%),
+      linear-gradient(135deg, var(--navy) 50%, transparent 50%);
+    background-position:
+      calc(100% - 20px) 24px,
+      calc(100% - 14px) 24px;
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+  }
+
+  select:focus {
+    border-color: var(--action-blue);
+    box-shadow: 0 0 0 3px rgba(0, 114, 206, 0.14);
+  }
+
+  .amount-wrap:focus-within {
+    border-color: var(--action-blue);
+    box-shadow: 0 0 0 3px rgba(0, 114, 206, 0.14);
+  }
+
+  .segmented {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .scope-button,
+  .scenario-button {
+    min-height: 46px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text-muted);
+    cursor: pointer;
+    font-weight: 750;
+    transition: all 0.16s ease;
+  }
+
+  .scope-button:hover,
+  .scenario-button:hover {
+    border-color: var(--action-blue);
+    color: var(--navy);
+  }
+
+  .scope-button.active,
+  .scenario-button.active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #fff;
+  }
+
+  .scenario-list {
+    display: grid;
+    gap: 8px;
+  }
+
+  .scenario-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    min-height: 52px;
+    padding: 0 14px;
+    text-align: left;
+  }
+
+  .scenario-button span {
+    color: inherit;
+    font-size: 12px;
+    font-weight: 850;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .assumption {
+    border-left: 3px solid var(--warning);
+    border-radius: var(--radius);
+    background: #fff8eb;
+    color: #5f4313;
+    padding: 14px 15px;
+    font-size: 13px;
+    margin-top: 22px;
+  }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .metric-card {
+    padding: 18px;
+    min-height: 154px;
+  }
+
+  .metric-label { color: var(--text-muted); }
+
+  .metric-value {
+    font-size: clamp(30px, 4vw, 48px);
+    font-weight: 500;
+    letter-spacing: 0.005em;
+    margin-top: 14px;
+  }
+
+  .metric-unit {
+    display: block;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 750;
+    margin-top: 7px;
+  }
+
+  .metric-detail { margin-top: 12px; }
+  .positive { color: var(--positive); }
+  .negative { color: var(--risk); }
+  .neutral { color: var(--warning); }
+
+  .main-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+    gap: 0;
+    margin-bottom: 24px;
+  }
+
+  .main-panel > section {
+    padding: 26px;
+  }
+
+  .main-panel > section + section {
+    border-left: 1px solid var(--border);
+    background: linear-gradient(180deg, #fff, var(--surface-soft));
+  }
+
+  .impact-number {
+    font-size: clamp(58px, 8vw, 112px);
+    font-weight: 500;
+    letter-spacing: 0.002em;
+    line-height: 0.9;
+    margin: 20px 0 10px;
+  }
+
+  .impact-number .metric-unit {
+    font-size: clamp(15px, 1.6vw, 20px);
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    margin-top: 12px;
+  }
+
+  .impact-text {
+    color: var(--text-muted);
+    max-width: 620px;
+    font-size: 16px;
+  }
+
+  .comparison {
+    display: grid;
+    gap: 18px;
+    margin-top: 28px;
+  }
+
+  .bar-row { display: grid; gap: 8px; }
+
+  .bar-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .bar-track {
+    height: 14px;
+    border-radius: var(--radius);
+    background: #dfe8f2;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    width: 0;
+    border-radius: var(--radius);
+    background: var(--blue);
+    transition: width 0.25s ease;
+  }
+
+  .bar-fill.benchmark { background: #8aa2ba; }
+
+  .coverage-wrap {
+    display: grid;
+    gap: 18px;
+  }
+
+  .coverage-card {
+    display: grid;
+    gap: 18px;
+  }
+
+  .coverage-primary {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 14px;
+  }
+
+  .coverage-value {
+    color: var(--navy);
+    font-family: var(--heading);
+    font-size: clamp(44px, 5vw, 64px);
+    font-weight: 500;
+    letter-spacing: 0.006em;
+    line-height: 0.95;
+  }
+
+  .coverage-status {
+    color: var(--positive);
+    font-size: 11px;
+    font-weight: 850;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .coverage-band {
+    position: relative;
+    height: 18px;
+    border-radius: var(--radius);
+    background:
+      repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.18) 0 1px,
+        transparent 1px 10%
+      ),
+      #dfe8f2;
+    overflow: hidden;
+  }
+
+  .coverage-fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: var(--radius);
+    background: linear-gradient(90deg, var(--blue), var(--positive));
+    transition: width 0.25s ease;
+  }
+
+  .coverage-marker {
+    position: absolute;
+    top: -5px;
+    width: 2px;
+    height: 28px;
+    background: var(--navy);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8);
+    transition: left 0.25s ease;
+  }
+
+  .coverage-scale {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 750;
+  }
+
+  .coverage-breakdown {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .coverage-breakdown div {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 12px;
+  }
+
+  .coverage-breakdown span {
+    display: block;
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 850;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .coverage-breakdown strong {
+    display: block;
+    color: var(--navy);
+    font-family: var(--heading);
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 0.006em;
+    margin-top: 4px;
+  }
+
+  .breakdown {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  .scope-chart {
+    display: grid;
+    gap: 14px;
+  }
+
+  .scope-row {
+    display: grid;
+    grid-template-columns: 86px minmax(0, 1fr) 88px;
+    gap: 12px;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 750;
+  }
+
+  .scope-track {
+    height: 10px;
+    border-radius: var(--radius);
+    background: #dfe8f2;
+  }
+
+  .scope-fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: var(--radius);
+    background: var(--blue);
+  }
+
+  .temp-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+    align-items: center;
+    background: var(--blue-tint);
+    border: 1px solid #c9e2fb;
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+
+  .thermometer {
+    width: 34px;
+    height: 156px;
+    border: 2px solid var(--navy);
+    border-radius: 999px;
+    position: relative;
+    background: #fff;
+  }
+
+  .thermometer-fill {
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    height: 45%;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #ffb84d, var(--risk));
+  }
+
+  .thermometer::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -18px;
+    width: 44px;
+    height: 44px;
+    border: 2px solid var(--navy);
+    border-radius: 50%;
+    background: var(--risk);
+    transform: translateX(-50%);
+  }
+
+  .temp-value {
+    font-size: 58px;
+    font-weight: 500;
+    letter-spacing: 0.006em;
+  }
+
+  .sample-explorer {
+    margin-bottom: 24px;
+  }
+
+  .sample-grid {
+    display: grid;
+    grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+    gap: 24px;
+  }
+
+  .slider-list,
+  .mini-bars {
+    display: grid;
+    gap: 14px;
+  }
+
+  .sample-slider-row {
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr) 58px;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 750;
+  }
+
+  input[type="range"] {
+    width: 100%;
+    accent-color: var(--blue);
+  }
+
+  .sample-output-grid {
+    display: grid;
+    grid-template-columns: minmax(190px, 0.7fr) minmax(0, 1fr);
+    gap: 20px;
+    align-items: start;
+  }
+
+  .donut-wrap {
+    position: relative;
+    width: 190px;
+    height: 190px;
+    margin: 0 auto;
+  }
+
+  .donut-wrap svg {
+    display: block;
+  }
+
+  .donut-center-label {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .donut-center-label strong {
+    font-size: 34px;
+    font-weight: 500;
+    letter-spacing: 0.006em;
+  }
+
+  .donut-center-label span {
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 850;
+    letter-spacing: 0.1em;
+    margin-top: 5px;
+    text-transform: uppercase;
+  }
+
+  .mini-bar-row {
+    display: grid;
+    grid-template-columns: 142px minmax(0, 1fr) 64px;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 750;
+  }
+
+  .mini-bar-track {
+    height: 10px;
+    border-radius: var(--radius);
+    background: #dfe8f2;
+    overflow: hidden;
+  }
+
+  .mini-bar-fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: var(--radius);
+    background: var(--blue);
+  }
+
+  .sample-note {
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-top: 16px;
+  }
+
+  .comparison-builder {
+    margin: 24px 0;
+  }
+
+  .comparison-actions {
+    display: flex;
+    flex: 0 0 620px;
+    flex-wrap: nowrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .action-button {
+    white-space: nowrap;
+    min-height: 42px;
+    border: 1px solid var(--navy);
+    border-radius: var(--radius);
+    background: var(--navy);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 800;
+    padding: 0 16px;
+    transition: all 0.16s ease;
+  }
+
+  .action-button.secondary {
+    background: var(--surface);
+    color: var(--navy);
+    border-color: var(--border-strong);
+  }
+
+  .action-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(0, 30, 66, 0.12);
+  }
+
+  .comparison-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  .comparison-table {
+    width: 100%;
+    min-width: 980px;
+    border-collapse: collapse;
+    background: var(--surface);
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .comparison-table th {
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 850;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .comparison-table td {
+    color: var(--text);
+    font-size: 13px;
+  }
+
+  .comparison-table tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .comparison-table strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  .comparison-table small {
+    display: block;
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-top: 3px;
+  }
+
+  .remove-compare {
+    border: 0;
+    background: transparent;
+    color: var(--risk);
+    cursor: pointer;
+    font-weight: 850;
+    padding: 0;
+  }
+
+  .empty-state {
+    background: var(--surface-soft);
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius);
+    color: var(--text-muted);
+    padding: 18px;
+    font-size: 13px;
+  }
+
+  .context-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .context-card p { margin-top: 12px; }
+
+  details {
+    border-top: 1px solid var(--border);
+    margin-top: 18px;
+    padding-top: 14px;
+  }
+
+  summary {
+    color: var(--navy);
+    cursor: pointer;
+    font-weight: 850;
+  }
+
+  .footnote {
+    border-top: 1px solid var(--border);
+    color: var(--text-light);
+    font-size: 12px;
+    line-height: 1.7;
+    margin-top: 34px;
+    padding-top: 22px;
+  }
+
+  @media (max-width: 1180px) {
+    .page {
+      max-width: 100%;
+      padding-inline: 24px;
+    }
+
+    .hero {
+      gap: 28px;
+    }
+
+    .results-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 1060px) {
+    .hero,
+    .layout,
+    .main-panel,
+    .breakdown,
+    .sample-grid,
+    .sample-output-grid { grid-template-columns: 1fr; }
+
+    .main-panel > section + section {
+      border-left: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .context-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .hero {
+      padding-top: 42px;
+      align-items: start;
+    }
+
+    .hero-card {
+      max-width: 720px;
+    }
+
+    .comparison-actions {
+      flex: 1 1 100%;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+  }
+
+  @media (max-width: 860px) {
+    h1 {
+      font-size: clamp(38px, 10vw, 64px);
+      letter-spacing: 0.008em;
+    }
+
+    h2 {
+      font-size: clamp(26px, 7vw, 38px);
+    }
+
+    .topbar {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .brand-logo {
+      width: min(228px, 82vw);
+    }
+
+    .hero-copy {
+      font-size: 16px;
+    }
+
+    .hero-stat strong {
+      font-size: 26px;
+    }
+
+    .comparison-actions,
+    .action-button {
+      width: 100%;
+    }
+
+    .sample-slider-row,
+    .mini-bar-row {
+      grid-template-columns: 120px minmax(0, 1fr) 58px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .page { padding: 16px 14px 40px; }
+    .hero,
+    .panel-header { display: block; }
+    .brand-logo { width: min(198px, 88vw); }
+    .meta-pill {
+      display: inline-block;
+      font-size: 10px;
+      line-height: 1.4;
+      margin-top: 0;
+      max-width: 100%;
+    }
+    .results-grid,
+    .context-grid,
+    .segmented { grid-template-columns: 1fr; }
+    .metric-card,
+    .panel-pad,
+    .main-panel > section { padding: 18px; }
+    .metric-card {
+      min-height: auto;
+    }
+
+    .hero {
+      padding: 34px 0 28px;
+    }
+
+    .hero-card,
+    .metric-card,
+    .panel,
+    .context-card {
+      box-shadow: 0 6px 18px rgba(0, 30, 66, 0.04);
+    }
+
+    .impact-number {
+      font-size: clamp(52px, 18vw, 78px);
+    }
+
+    .scope-row,
+    .sample-slider-row,
+    .mini-bar-row {
+      grid-template-columns: 1fr;
+      gap: 7px;
+    }
+
+    .donut-wrap {
+      width: min(190px, 72vw);
+    }
+
+    .temp-card {
+      grid-template-columns: 1fr;
+    }
+
+    .thermometer {
+      display: none;
+    }
+
+    .comparison-table-wrap {
+      border: 0;
+      overflow: visible;
+    }
+
+    .comparison-table {
+      min-width: 0;
+    }
+
+    .comparison-table,
+    .comparison-table thead,
+    .comparison-table tbody,
+    .comparison-table tr,
+    .comparison-table td {
+      display: block;
+      width: 100%;
+    }
+
+    .comparison-table thead {
+      display: none;
+    }
+
+    .comparison-table tr {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    .comparison-table td {
+      display: grid;
+      grid-template-columns: 116px minmax(0, 1fr);
+      gap: 12px;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .comparison-table td::before {
+      color: var(--text-muted);
+      content: "";
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .comparison-table td:nth-child(1)::before { content: "Config"; }
+    .comparison-table td:nth-child(2)::before { content: "Fund"; }
+    .comparison-table td:nth-child(3)::before { content: "Benchmark"; }
+    .comparison-table td:nth-child(4)::before { content: "Footprint"; }
+    .comparison-table td:nth-child(5)::before { content: "Delta"; }
+    .comparison-table td:nth-child(6)::before { content: "Impact"; }
+    .comparison-table td:nth-child(7)::before { content: "Coverage"; }
+    .comparison-table td:nth-child(8)::before { content: ""; }
+  }
+
+  @media (max-width: 440px) {
+    body {
+      font-size: 14px;
+    }
+
+    .page {
+      padding-inline: 10px;
+    }
+
+    h1 {
+      font-size: 36px;
+      letter-spacing: 0.006em;
+    }
+
+    .brand-logo {
+      width: min(175px, 92vw);
+    }
+
+    .hero-card-title {
+      display: block;
+    }
+
+    .metric-value {
+      font-size: 36px;
+    }
+
+    .comparison-table td {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="topbar" aria-label="Page header">
+    <div class="brand">
+      <img
+        class="brand-logo"
+        src="/Users/earl.petersen/.cursor/projects/Users-earl-petersen-Library-CloudStorage-OneDrive-Kurtosys-Kurtosys-Clients-Miscellaneous-AI-hackathon/assets/SSIM-logo-blue-4e2c04b7-2eb9-4f01-9671-d626722003b9.png"
+        alt="State Street Investment Management"
+      />
+    </div>
+    <div class="meta-pill">Brief B · Team 1 · Interactive Simulator</div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Getting there starts here</p>
+        <h1 id="page-title">Interactive ESG <span class="title-amp">&amp;</span> Carbon Impact Simulator</h1>
+        <p class="hero-copy">
+          Enter an investment amount to translate portfolio-level SSGA sustainability metrics into a clear,
+          benchmark-aware carbon impact estimate. The experience is designed for transparent product storytelling,
+          not per-holding production calculations.
+        </p>
+      </div>
+
+      <aside class="hero-card" aria-label="Dataset summary">
+        <div class="hero-card-title">
+          <span>Dataset context</span>
+          <span id="summary-period">31-Jan-25</span>
+        </div>
+        <div class="hero-stat">
+          <span>Fund</span>
+          <strong id="summary-fund">World ESG Index Equity</strong>
+        </div>
+        <div class="hero-stat">
+          <span>Primary dataset</span>
+          <strong>nexus_sustainability</strong>
+        </div>
+        <div class="hero-stat">
+          <span>Benchmark</span>
+          <strong id="summary-benchmark">Bloomberg MSCI ESG Custom</strong>
+        </div>
+      </aside>
+    </section>
+
+    <section class="layout" aria-label="Simulator controls and results">
+      <aside class="panel panel-pad" aria-labelledby="controls-title">
+        <div class="panel-header">
+          <div>
+            <p class="panel-kicker">Simulator Inputs</p>
+            <h2 id="controls-title">Investment view</h2>
+            <p class="panel-note">Values update from portfolio-level carbon footprint metrics.</p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="investment-amount">Investment amount</label>
+          <div class="amount-wrap">
+            <span class="currency-prefix">$</span>
+            <input id="investment-amount" type="text" inputmode="decimal" value="100,000" aria-describedby="amount-help" />
+          </div>
+          <span id="amount-help" class="panel-note">Used to scale an illustrative financed-emissions-style estimate.</span>
+        </div>
+
+        <div class="field">
+          <label for="fund-select">Fund</label>
+          <select id="fund-select" aria-describedby="fund-help"></select>
+          <span id="fund-help" class="panel-note">Select a portfolio-level sustainability record to compare.</span>
+        </div>
+
+        <div class="field">
+          <label for="benchmark-select">Benchmark</label>
+          <select id="benchmark-select" aria-describedby="benchmark-help"></select>
+          <span id="benchmark-help" class="panel-note">Benchmark values update independently from the selected fund.</span>
+        </div>
+
+        <div class="field">
+          <span class="label" id="scope-label">Carbon scope</span>
+          <div class="segmented" role="group" aria-labelledby="scope-label" id="scope-options">
+            <button class="scope-button" type="button" data-scope="scope1">Scope 1</button>
+            <button class="scope-button" type="button" data-scope="scope2">Scope 2</button>
+            <button class="scope-button" type="button" data-scope="scope3">Scope 3</button>
+            <button class="scope-button" type="button" data-scope="scope12">Scope 1+2</button>
+            <button class="scope-button active" type="button" data-scope="scope123">Scope 1+2+3</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="label" id="scenario-label">Scenario</span>
+          <div class="scenario-list" role="group" aria-labelledby="scenario-label" id="scenario-options">
+            <button class="scenario-button active" type="button" data-scenario="current">Current portfolio <span>0%</span></button>
+            <button class="scenario-button" type="button" data-scenario="lowerCarbon">Lower-carbon tilt <span>-18%</span></button>
+            <button class="scenario-button" type="button" data-scenario="benchmark">Benchmark comparison <span>BM</span></button>
+            <button class="scenario-button" type="button" data-scenario="parisAligned">Paris-aligned illustrative strategy <span>-68%</span></button>
+          </div>
+        </div>
+
+        <div class="assumption">
+          Carbon footprint is an intensity metric. Investment scaling below is an educational approximation and
+          should not be read as production financed-emissions methodology.
+        </div>
+      </aside>
+
+      <div>
+        <section class="results-grid" aria-label="Key metrics">
+          <article class="metric-card">
+            <div class="metric-label">Carbon footprint</div>
+            <div class="metric-value" id="metric-footprint">216.99</div>
+            <div class="metric-unit">tCO2e / $M EVIC</div>
+            <div class="metric-detail" id="metric-footprint-detail">Scope 1+2+3 portfolio metric</div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-label">Vs benchmark</div>
+            <div class="metric-value" id="metric-difference">+1.36</div>
+            <div class="metric-unit">tCO2e / $M EVIC</div>
+            <div class="metric-detail" id="metric-difference-detail">+0.6% versus benchmark</div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-label">Coverage</div>
+            <div class="metric-value" id="metric-coverage">84.78%</div>
+            <div class="metric-unit">portfolio coverage</div>
+            <div class="metric-detail" id="metric-benchmark-coverage">Benchmark coverage 86.16%</div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-label">Carbon risk rating</div>
+            <div class="metric-value" id="metric-risk-rating">56.34</div>
+            <div class="metric-unit">portfolio score</div>
+            <div class="metric-detail" id="metric-risk-detail">Benchmark 56.45 · low carbon transition score 6.01</div>
+          </article>
+        </section>
+
+        <section class="panel main-panel" aria-labelledby="impact-title">
+          <section>
+            <p class="panel-kicker">Illustrative Estimate</p>
+            <h2 id="impact-title">Investment-scaled carbon impact</h2>
+            <div class="impact-number"><span id="impact-number">21.70</span><span class="metric-unit">tCO2e estimate</span></div>
+            <p class="impact-text" id="impact-copy">
+              For a $100,000 investment, this scenario maps to an estimated 21.70 tCO2e using the selected
+              portfolio carbon-footprint intensity.
+            </p>
+
+            <div class="comparison" aria-label="Portfolio and benchmark comparison">
+              <div class="bar-row">
+                <div class="bar-top">
+                  <span id="portfolio-bar-label">Portfolio · Scope 1+2+3</span>
+                  <span id="portfolio-bar-value">216.99</span>
+                </div>
+                <div class="bar-track"><div class="bar-fill" id="portfolio-bar"></div></div>
+              </div>
+              <div class="bar-row">
+                <div class="bar-top">
+                  <span>Benchmark</span>
+                  <span id="benchmark-bar-value">215.63</span>
+                </div>
+                <div class="bar-track"><div class="bar-fill benchmark" id="benchmark-bar"></div></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="coverage-wrap" aria-labelledby="coverage-title">
+            <div>
+              <p class="panel-kicker">Metric Quality</p>
+              <h3 id="coverage-title">Coverage quality</h3>
+              <p class="panel-note">Coverage represents the share of the portfolio covered by the selected carbon metric.</p>
+            </div>
+            <div class="coverage-card" role="img" aria-label="Portfolio coverage compared with benchmark coverage">
+              <div class="coverage-primary">
+                <div class="coverage-value" id="coverage-meter-text">84.78%</div>
+                <div class="coverage-status" id="coverage-status">High coverage</div>
+              </div>
+              <div>
+                <div class="coverage-band">
+                  <span class="coverage-fill" id="coverage-fill"></span>
+                  <span class="coverage-marker" id="coverage-marker" title="Benchmark coverage"></span>
+                </div>
+                <div class="coverage-scale">
+                  <span>0%</span>
+                  <span>50%</span>
+                  <span>100%</span>
+                </div>
+              </div>
+              <div class="coverage-breakdown">
+                <div>
+                  <span>Uncovered</span>
+                  <strong id="coverage-uncovered">15.22%</strong>
+                </div>
+                <div>
+                  <span>Benchmark</span>
+                  <strong id="coverage-benchmark">86.16%</strong>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section class="breakdown" aria-label="Carbon breakdown and temperature alignment">
+          <article class="panel panel-pad">
+            <div class="panel-header">
+              <div>
+                <p class="panel-kicker">Scope Breakdown</p>
+                <h3>Portfolio carbon footprint</h3>
+              </div>
+            </div>
+            <div class="scope-chart" id="scope-chart"></div>
+          </article>
+
+          <article class="temp-card">
+            <div class="thermometer" aria-hidden="true"><div class="thermometer-fill"></div></div>
+            <div>
+              <p class="panel-kicker">Temperature Alignment</p>
+              <div class="temp-value" id="metric-temperature">2.33&deg;C</div>
+              <p class="panel-note" id="temperature-detail">
+                Implied temperature rise is available for the portfolio in this mock dataset. Benchmark value is not available.
+              </p>
+              <details>
+                <summary>Methodology note</summary>
+                <p class="panel-note">
+                  Production values would come from nexus_sustainability as already-weighted portfolio summary
+                  metrics. Holdings and sustainability data are separate SSGA apps and should not be presented as a
+                  combined per-security ESG endpoint.
+                </p>
+              </details>
+            </div>
+          </article>
+        </section>
+      </div>
+    </section>
+
+    <section class="panel panel-pad sample-explorer" aria-labelledby="sample-explorer-title">
+      <div class="panel-header">
+        <div>
+          <p class="panel-kicker">Sample Data Explorer</p>
+          <h2 id="sample-explorer-title">Run the sustainability sample through the simulator</h2>
+          <p class="panel-note">
+            Uses the PDF sample categories for carbon footprint, R-Factor profile, product involvement, and coverage.
+            Sector sliders are an illustrative scenario overlay, not a production per-holding endpoint.
+          </p>
+        </div>
+      </div>
+
+      <div class="sample-grid">
+        <article>
+          <p class="label">Illustrative allocation sliders</p>
+          <div class="slider-list" id="sector-sliders"></div>
+          <p class="sample-note">
+            Slider weights normalize to 100% and drive the donut plus the sample carbon contribution bars.
+          </p>
+        </article>
+
+        <article class="sample-output-grid">
+          <div class="donut-wrap" aria-label="Illustrative allocation donut">
+            <svg width="190" height="190" viewBox="0 0 190 190" role="img">
+              <circle cx="95" cy="95" r="72" fill="none" stroke="#dfe8f2" stroke-width="24"></circle>
+              <g id="allocation-donut" transform="rotate(-90 95 95)"></g>
+            </svg>
+            <div class="donut-center-label">
+              <strong id="overlay-carbon">0.00</strong>
+              <span>tCO2e / $M</span>
+            </div>
+          </div>
+
+          <div>
+            <p class="label">Carbon contribution by sector</p>
+            <div class="mini-bars" id="sector-carbon-bars"></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="breakdown" style="margin-top: 24px; margin-bottom: 0;">
+        <article class="panel panel-pad">
+          <div class="panel-header">
+            <div>
+              <p class="panel-kicker">R-Factor Profile</p>
+              <h3>Distribution of sustainability performance</h3>
+            </div>
+          </div>
+          <div class="mini-bars" id="rfactor-bars"></div>
+        </article>
+
+        <article class="panel panel-pad">
+          <div class="panel-header">
+            <div>
+              <p class="panel-kicker">Product Involvement</p>
+              <h3>Screened exposure categories</h3>
+            </div>
+          </div>
+          <div class="mini-bars" id="product-involvement-bars"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel panel-pad comparison-builder" aria-labelledby="comparison-set-title">
+      <div class="panel-header">
+        <div>
+          <p class="panel-kicker">Comparison Set</p>
+          <h2 id="comparison-set-title">Compare configurations</h2>
+          <p class="panel-note">
+            Capture different fund, benchmark, scope, scenario, and investment combinations to compare them side by side.
+          </p>
+        </div>
+        <div class="comparison-actions" aria-label="Comparison actions">
+          <button class="action-button" type="button" id="add-comparison">Add current configuration</button>
+          <button class="action-button secondary" type="button" id="export-comparisons">Export .xlsx</button>
+          <button class="action-button secondary" type="button" id="reset-comparisons">Reset examples</button>
+          <button class="action-button secondary" type="button" id="clear-comparisons">Clear</button>
+        </div>
+      </div>
+
+      <div id="comparison-empty" class="empty-state" hidden>
+        No saved configurations yet. Choose a fund, benchmark, scope, and scenario, then add the current configuration.
+      </div>
+
+      <div class="comparison-table-wrap" id="comparison-table-wrap">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Configuration</th>
+              <th>Fund</th>
+              <th>Benchmark</th>
+              <th>Footprint</th>
+              <th>Delta</th>
+              <th>Impact Estimate</th>
+              <th>Coverage</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="comparison-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="context-grid" aria-label="Data and schema context">
+      <article class="context-card">
+        <p class="panel-kicker">Schema Source</p>
+        <h3>Portfolio-level metric</h3>
+        <p>
+          The SSGA nexus_sustainability dataset is sourced from VWS_ESG_PORTFOLIO_CHARACTERISTICS
+          and returns portfolio-level sustainability metrics, including carbon footprint, total emissions,
+          WACI, climate VaR, implied temperature rise, brown revenues, and R-Factor.
+        </p>
+      </article>
+
+      <article class="context-card">
+        <p class="panel-kicker">Water Constraint</p>
+        <h3>Future illustrative metric</h3>
+        <p>
+          Water stress is not currently present in the SSGA nexus_sustainability schema. It is intentionally
+          excluded from primary outputs here and should only be shown as a clearly labelled future extension.
+        </p>
+      </article>
+
+      <article class="context-card">
+        <p class="panel-kicker">Holdings Constraint</p>
+        <h3>Separate app boundary</h3>
+        <p>
+          Holdings data lives in nexus_holdings_view / nexus_holdings_export using FUND_ID.
+          Sustainability data uses CRS_FUND_ALIAS. There is no schema-supported endpoint combining
+          holdings weights with per-security carbon footprint values.
+        </p>
+      </article>
+    </section>
+
+    <p class="footnote">
+      Illustrative prototype for hackathon purposes only. The displayed values use schema-aligned mock data from
+      SSGA sustainability exports plus the supplied SSIM sample methodology categories, and are not investment advice,
+      a solicitation, a production financed-emissions methodology, or a guarantee of actual avoided emissions.
+      Sector sliders, donut charts, and product involvement charts are illustrative visualizations of sample categories,
+      not evidence of a production per-holding ESG endpoint. All water-related functionality is excluded from primary
+      outputs because water stress is not currently available in the SSGA sustainability schema.
+    </p>
+  </main>
+</div>
+
+<script>
+(function () {
+  const ssgaSustainabilityMock = {
+    datasetName: "nexus_sustainability",
+    sourceView: "VWS_ESG_PORTFOLIO_CHARACTERISTICS",
+    funds: {
+      worldEsg: {
+        name: "State Street World ESG Index Equity Fund - A",
+        shortName: "World ESG Index Equity",
+        periodEnd: "31-Jan-25",
+        carbonFootprint: {
+          scope123: { label: "Scope 1+2+3", portfolio: 216.99, portfolioCoverage: 84.78 },
+          scope12: { label: "Scope 1+2", portfolio: 58.83, portfolioCoverage: 92.88 },
+          scope1: { label: "Scope 1", portfolio: 51.53, portfolioCoverage: 92.88 },
+          scope2: { label: "Scope 2", portfolio: 7.30, portfolioCoverage: 92.88 },
+          scope3: { label: "Scope 3", portfolio: 181.49, portfolioCoverage: 88.76 }
+        },
+        climate: {
+          carbonRiskRating: 56.34,
+          lowCarbonTransitionScore: 6.01,
+          impliedTemperatureRise: 2.33,
+          brownRevenues: 2.48
+        }
+      },
+      euroParis: {
+        name: "State Street Euro Area ESG Screened Equity Fund",
+        shortName: "Euro Area ESG Screened",
+        periodEnd: "31-Jan-25",
+        carbonFootprint: {
+          scope123: { label: "Scope 1+2+3", portfolio: 84.40, portfolioCoverage: 83.90 },
+          scope12: { label: "Scope 1+2", portfolio: 34.80, portfolioCoverage: 91.60 },
+          scope1: { label: "Scope 1", portfolio: 28.60, portfolioCoverage: 91.60 },
+          scope2: { label: "Scope 2", portfolio: 6.20, portfolioCoverage: 91.60 },
+          scope3: { label: "Scope 3", portfolio: 61.50, portfolioCoverage: 87.30 }
+        },
+        climate: {
+          carbonRiskRating: 51.90,
+          lowCarbonTransitionScore: 6.42,
+          impliedTemperatureRise: 2.08,
+          brownRevenues: 1.82
+        }
+      },
+      emLowCarbon: {
+        name: "State Street Emerging Markets Low Carbon Equity Fund",
+        shortName: "EM Low Carbon Equity",
+        periodEnd: "31-Jan-25",
+        carbonFootprint: {
+          scope123: { label: "Scope 1+2+3", portfolio: 142.75, portfolioCoverage: 78.40 },
+          scope12: { label: "Scope 1+2", portfolio: 63.20, portfolioCoverage: 85.70 },
+          scope1: { label: "Scope 1", portfolio: 54.90, portfolioCoverage: 85.70 },
+          scope2: { label: "Scope 2", portfolio: 8.30, portfolioCoverage: 85.70 },
+          scope3: { label: "Scope 3", portfolio: 106.10, portfolioCoverage: 81.20 }
+        },
+        climate: {
+          carbonRiskRating: 60.70,
+          lowCarbonTransitionScore: 5.58,
+          impliedTemperatureRise: 2.56,
+          brownRevenues: 3.14
+        }
+      }
+    },
+    benchmarks: {
+      customGov: {
+        name: "Bloomberg MSCI US Corporate/Government ESG Custom Index",
+        shortName: "Bloomberg MSCI ESG Custom",
+        carbonFootprint: {
+          scope123: { benchmark: 215.63, benchmarkCoverage: 86.16 },
+          scope12: { benchmark: 57.59, benchmarkCoverage: 94.75 },
+          scope1: { benchmark: 50.54, benchmarkCoverage: 94.75 },
+          scope2: { benchmark: 7.05, benchmarkCoverage: 94.75 },
+          scope3: { benchmark: 178.52, benchmarkCoverage: 90.20 }
+        },
+        climate: {
+          carbonRiskRating: 56.45,
+          lowCarbonTransitionScore: 6.01,
+          impliedTemperatureRise: null,
+          brownRevenues: 2.38
+        }
+      },
+      msciWorld: {
+        name: "MSCI World Index",
+        shortName: "MSCI World",
+        carbonFootprint: {
+          scope123: { benchmark: 238.60, benchmarkCoverage: 87.40 },
+          scope12: { benchmark: 66.10, benchmarkCoverage: 95.20 },
+          scope1: { benchmark: 57.20, benchmarkCoverage: 95.20 },
+          scope2: { benchmark: 8.90, benchmarkCoverage: 95.20 },
+          scope3: { benchmark: 196.30, benchmarkCoverage: 91.10 }
+        },
+        climate: {
+          carbonRiskRating: 58.20,
+          lowCarbonTransitionScore: 5.91,
+          impliedTemperatureRise: 2.48,
+          brownRevenues: 2.82
+        }
+      },
+      euroStoxx: {
+        name: "EURO STOXX ESG Leaders 50 Index",
+        shortName: "EURO STOXX ESG Leaders",
+        carbonFootprint: {
+          scope123: { benchmark: 96.80, benchmarkCoverage: 84.70 },
+          scope12: { benchmark: 41.35, benchmarkCoverage: 92.10 },
+          scope1: { benchmark: 33.95, benchmarkCoverage: 92.10 },
+          scope2: { benchmark: 7.40, benchmarkCoverage: 92.10 },
+          scope3: { benchmark: 72.90, benchmarkCoverage: 88.00 }
+        },
+        climate: {
+          carbonRiskRating: 53.10,
+          lowCarbonTransitionScore: 6.28,
+          impliedTemperatureRise: 2.18,
+          brownRevenues: 1.96
+        }
+      }
+    },
+    futureWaterStress: {
+      portfolioWaterStress: 0,
+      benchmarkWaterStress: 0,
+      coveragePct: 0,
+      difference: 0,
+      note: "Illustrative future metric. Water stress is not currently present in the SSGA nexus_sustainability schema."
+    }
+  };
+
+  const scenarios = {
+    current: {
+      label: "Current portfolio",
+      multiplier: 1,
+      coverageAdjustment: 0,
+      detail: "using the selected portfolio carbon-footprint intensity"
+    },
+    lowerCarbon: {
+      label: "Lower-carbon tilt",
+      multiplier: 0.82,
+      coverageAdjustment: -1.4,
+      detail: "using an illustrative lower-carbon scenario applied to the portfolio-level metric"
+    },
+    benchmark: {
+      label: "Benchmark comparison",
+      multiplier: "benchmark",
+      coverageAdjustment: 0,
+      detail: "using the selected benchmark carbon-footprint intensity"
+    },
+    parisAligned: {
+      label: "Paris-aligned illustrative strategy",
+      multiplier: 0.32,
+      coverageAdjustment: -4.6,
+      detail: "using an illustrative Paris-aligned strategy overlay"
+    }
+  };
+
+  const sampleInteractiveData = {
+    sectorProfiles: {
+      worldEsg: [
+        { id: "tech", label: "Technology", weight: 24, carbon: 35, color: "#005eb8" },
+        { id: "financials", label: "Financials", weight: 17, carbon: 28, color: "#0072ce" },
+        { id: "healthcare", label: "Healthcare", weight: 14, carbon: 44, color: "#5aa6df" },
+        { id: "industrials", label: "Industrials", weight: 13, carbon: 182, color: "#7f9db8" },
+        { id: "consumer", label: "Consumer", weight: 12, carbon: 96, color: "#9fb4c8" },
+        { id: "energy", label: "Energy", weight: 8, carbon: 540, color: "#b42318" },
+        { id: "utilities", label: "Utilities", weight: 6, carbon: 242, color: "#b7791f" },
+        { id: "materials", label: "Materials", weight: 6, carbon: 318, color: "#7d4f1d" }
+      ],
+      euroParis: [
+        { id: "tech", label: "Technology", weight: 18, carbon: 31, color: "#005eb8" },
+        { id: "industrials", label: "Industrials", weight: 17, carbon: 126, color: "#7f9db8" },
+        { id: "financials", label: "Financials", weight: 16, carbon: 26, color: "#0072ce" },
+        { id: "healthcare", label: "Healthcare", weight: 15, carbon: 42, color: "#5aa6df" },
+        { id: "consumer", label: "Consumer", weight: 14, carbon: 82, color: "#9fb4c8" },
+        { id: "utilities", label: "Utilities", weight: 9, carbon: 168, color: "#b7791f" },
+        { id: "materials", label: "Materials", weight: 7, carbon: 214, color: "#7d4f1d" },
+        { id: "energy", label: "Energy", weight: 4, carbon: 410, color: "#b42318" }
+      ],
+      emLowCarbon: [
+        { id: "financials", label: "Financials", weight: 22, carbon: 34, color: "#0072ce" },
+        { id: "tech", label: "Technology", weight: 20, carbon: 48, color: "#005eb8" },
+        { id: "consumer", label: "Consumer", weight: 16, carbon: 112, color: "#9fb4c8" },
+        { id: "materials", label: "Materials", weight: 12, carbon: 268, color: "#7d4f1d" },
+        { id: "industrials", label: "Industrials", weight: 11, carbon: 194, color: "#7f9db8" },
+        { id: "energy", label: "Energy", weight: 8, carbon: 512, color: "#b42318" },
+        { id: "utilities", label: "Utilities", weight: 6, carbon: 286, color: "#b7791f" },
+        { id: "healthcare", label: "Healthcare", weight: 5, carbon: 52, color: "#5aa6df" }
+      ]
+    },
+    rFactorProfile: [
+      { label: "Leader", value: 12, color: "#2e7d5b" },
+      { label: "Outperformer", value: 24, color: "#0072ce" },
+      { label: "Average", value: 39, color: "#8aa2ba" },
+      { label: "Underperformer", value: 18, color: "#b7791f" },
+      { label: "Laggard", value: 7, color: "#b42318" }
+    ],
+    productInvolvement: [
+      { label: "Thermal Coal", value: 1.8, color: "#b42318" },
+      { label: "Oil Sands", value: 0.7, color: "#b7791f" },
+      { label: "Arctic Oil & Gas", value: 0.4, color: "#7d4f1d" },
+      { label: "Civilian Firearms", value: 0.2, color: "#8aa2ba" },
+      { label: "Tobacco", value: 0.1, color: "#8aa2ba" }
+    ]
+  };
+
+  const currency = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  const precise = new Intl.NumberFormat("en-US", { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+  const compact = new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 });
+  const crcTable = Array.from({ length: 256 }, (_, tableIndex) => {
+    let value = tableIndex;
+    for (let bit = 0; bit < 8; bit += 1) {
+      value = value & 1 ? 0xedb88320 ^ (value >>> 1) : value >>> 1;
+    }
+    return value >>> 0;
+  });
+
+  let selectedFund = "worldEsg";
+  let selectedBenchmark = "customGov";
+  let selectedScope = "scope123";
+  let selectedScenario = "current";
+  let investmentAmount = 100000;
+  let comparisonSet = [];
+  let activeSectorWeights = {};
+
+  const amountInput = document.getElementById("investment-amount");
+  const fundSelect = document.getElementById("fund-select");
+  const benchmarkSelect = document.getElementById("benchmark-select");
+  const sectorSliders = document.getElementById("sector-sliders");
+  const allocationDonut = document.getElementById("allocation-donut");
+  const overlayCarbon = document.getElementById("overlay-carbon");
+  const sectorCarbonBars = document.getElementById("sector-carbon-bars");
+  const rfactorBars = document.getElementById("rfactor-bars");
+  const productInvolvementBars = document.getElementById("product-involvement-bars");
+  const comparisonBody = document.getElementById("comparison-body");
+  const comparisonEmpty = document.getElementById("comparison-empty");
+  const comparisonTableWrap = document.getElementById("comparison-table-wrap");
+  const addComparisonButton = document.getElementById("add-comparison");
+  const exportComparisonsButton = document.getElementById("export-comparisons");
+  const resetComparisonsButton = document.getElementById("reset-comparisons");
+  const clearComparisonsButton = document.getElementById("clear-comparisons");
+  const scopeButtons = Array.from(document.querySelectorAll(".scope-button"));
+  const scenarioButtons = Array.from(document.querySelectorAll(".scenario-button"));
+
+  function parseAmount(value) {
+    const normalized = String(value).replace(/[^\d.]/g, "");
+    const parsed = Number.parseFloat(normalized);
+    return Number.isFinite(parsed) ? parsed : 0;
+  }
+
+  function populateSelectors() {
+    fundSelect.innerHTML = Object.entries(ssgaSustainabilityMock.funds).map(([key, fund]) =>
+      `<option value="${key}">${fund.name}</option>`
+    ).join("");
+    benchmarkSelect.innerHTML = Object.entries(ssgaSustainabilityMock.benchmarks).map(([key, benchmark]) =>
+      `<option value="${key}">${benchmark.name}</option>`
+    ).join("");
+    fundSelect.value = selectedFund;
+    benchmarkSelect.value = selectedBenchmark;
+  }
+
+  function scenarioMetric(base, benchmarkBase, scenarioKey = selectedScenario) {
+    const scenario = scenarios[scenarioKey];
+    if (scenario.multiplier === "benchmark") {
+      return {
+        value: benchmarkBase.benchmark,
+        coverage: benchmarkBase.benchmarkCoverage,
+        benchmark: benchmarkBase.benchmark,
+        label: scenario.label
+      };
+    }
+
+    return {
+      value: base.portfolio * scenario.multiplier,
+      coverage: Math.max(0, Math.min(100, base.portfolioCoverage + scenario.coverageAdjustment)),
+      benchmark: benchmarkBase.benchmark,
+      label: scenario.label
+    };
+  }
+
+  function getComparisonSnapshot(config = {}) {
+    const fundKey = config.fundKey || selectedFund;
+    const benchmarkKey = config.benchmarkKey || selectedBenchmark;
+    const scopeKey = config.scopeKey || selectedScope;
+    const scenarioKey = config.scenarioKey || selectedScenario;
+    const amount = config.amount || investmentAmount;
+    const fund = ssgaSustainabilityMock.funds[fundKey];
+    const benchmark = ssgaSustainabilityMock.benchmarks[benchmarkKey];
+    const base = fund.carbonFootprint[scopeKey];
+    const benchmarkBase = benchmark.carbonFootprint[scopeKey];
+    const scenario = scenarios[scenarioKey];
+    const metric = scenarioMetric(base, benchmarkBase, scenarioKey);
+    const impact = (amount / 1000000) * metric.value;
+    const benchmarkImpact = (amount / 1000000) * benchmarkBase.benchmark;
+    const difference = metric.value - benchmarkBase.benchmark;
+    const differencePct = benchmarkBase.benchmark === 0 ? 0 : (difference / benchmarkBase.benchmark) * 100;
+
+    return {
+      id: `${fundKey}-${benchmarkKey}-${scopeKey}-${scenarioKey}-${Math.round(amount)}`,
+      fundKey,
+      benchmarkKey,
+      scopeKey,
+      scenarioKey,
+      amount,
+      fund,
+      benchmark,
+      scopeLabel: base.label,
+      scenarioLabel: scenario.label,
+      footprint: metric.value,
+      benchmarkFootprint: benchmarkBase.benchmark,
+      impact,
+      benchmarkImpact,
+      coverage: metric.coverage,
+      benchmarkCoverage: benchmarkBase.benchmarkCoverage,
+      difference,
+      differencePct
+    };
+  }
+
+  function renderComparisonSet() {
+    comparisonEmpty.hidden = comparisonSet.length > 0;
+    comparisonTableWrap.hidden = comparisonSet.length === 0;
+    comparisonBody.innerHTML = comparisonSet.map((item, index) => {
+      const deltaClass = item.difference < 0 ? "positive" : item.difference > 0 ? "negative" : "neutral";
+      return `
+        <tr>
+          <td>
+            <strong>${item.scopeLabel}</strong>
+            <small>${item.scenarioLabel} · ${currency.format(item.amount)}</small>
+          </td>
+          <td>
+            <strong>${item.fund.shortName}</strong>
+            <small>${item.fund.periodEnd}</small>
+          </td>
+          <td>
+            <strong>${item.benchmark.shortName}</strong>
+            <small>${precise.format(item.benchmarkFootprint)} tCO2e / $M EVIC</small>
+          </td>
+          <td>
+            <strong>${precise.format(item.footprint)}</strong>
+            <small>tCO2e / $M EVIC</small>
+          </td>
+          <td>
+            <strong class="${deltaClass}">${item.difference >= 0 ? "+" : ""}${precise.format(item.difference)}</strong>
+            <small>${item.differencePct >= 0 ? "+" : ""}${compact.format(item.differencePct)}% vs benchmark</small>
+          </td>
+          <td>
+            <strong>${precise.format(item.impact)}</strong>
+            <small>Benchmark ${precise.format(item.benchmarkImpact)} tCO2e</small>
+          </td>
+          <td>
+            <strong>${precise.format(item.coverage)}%</strong>
+            <small>Benchmark ${precise.format(item.benchmarkCoverage)}%</small>
+          </td>
+          <td><button class="remove-compare" type="button" data-index="${index}">Remove</button></td>
+        </tr>
+      `;
+    }).join("");
+  }
+
+  function addCurrentComparison() {
+    const snapshot = getComparisonSnapshot();
+    const exists = comparisonSet.some((item) => item.id === snapshot.id);
+    if (!exists) {
+      comparisonSet = [...comparisonSet, snapshot];
+      renderComparisonSet();
+    }
+  }
+
+  function resetComparisonExamples() {
+    comparisonSet = [
+      getComparisonSnapshot({
+        fundKey: "worldEsg",
+        benchmarkKey: "customGov",
+        scopeKey: "scope123",
+        scenarioKey: "current",
+        amount: 100000
+      }),
+      getComparisonSnapshot({
+        fundKey: "euroParis",
+        benchmarkKey: "euroStoxx",
+        scopeKey: "scope12",
+        scenarioKey: "lowerCarbon",
+        amount: 250000
+      }),
+      getComparisonSnapshot({
+        fundKey: "emLowCarbon",
+        benchmarkKey: "msciWorld",
+        scopeKey: "scope123",
+        scenarioKey: "parisAligned",
+        amount: 500000
+      })
+    ];
+    renderComparisonSet();
+  }
+
+  function escapeXml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&apos;");
+  }
+
+  function columnName(index) {
+    let name = "";
+    let current = index + 1;
+    while (current > 0) {
+      const remainder = (current - 1) % 26;
+      name = String.fromCharCode(65 + remainder) + name;
+      current = Math.floor((current - 1) / 26);
+    }
+    return name;
+  }
+
+  function worksheetXml(rows) {
+    const sheetRows = rows.map((row, rowIndex) => {
+      const cells = row.map((value, columnIndex) => {
+        const ref = `${columnName(columnIndex)}${rowIndex + 1}`;
+        if (typeof value === "number" && Number.isFinite(value)) {
+          return `<c r="${ref}"><v>${value}</v></c>`;
+        }
+        return `<c r="${ref}" t="inlineStr"><is><t>${escapeXml(value)}</t></is></c>`;
+      }).join("");
+      return `<row r="${rowIndex + 1}">${cells}</row>`;
+    }).join("");
+
+    return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
+  <sheetViews><sheetView workbookViewId="0"/></sheetViews>
+  <sheetFormatPr defaultRowHeight="16"/>
+  <sheetData>${sheetRows}</sheetData>
+</worksheet>`;
+  }
+
+  function crc32(bytes) {
+    let crc = -1;
+    for (let index = 0; index < bytes.length; index += 1) {
+      crc = (crc >>> 8) ^ crcTable[(crc ^ bytes[index]) & 0xff];
+    }
+    return (crc ^ -1) >>> 0;
+  }
+
+  function createZip(files) {
+    const encoder = new TextEncoder();
+    const chunks = [];
+    const centralDirectory = [];
+    let offset = 0;
+
+    files.forEach((file) => {
+      const nameBytes = encoder.encode(file.name);
+      const dataBytes = encoder.encode(file.content);
+      const checksum = crc32(dataBytes);
+      const local = new Uint8Array(30 + nameBytes.length + dataBytes.length);
+      const view = new DataView(local.buffer);
+      view.setUint32(0, 0x04034b50, true);
+      view.setUint16(4, 20, true);
+      view.setUint16(6, 0, true);
+      view.setUint16(8, 0, true);
+      view.setUint16(10, 0, true);
+      view.setUint16(12, 0, true);
+      view.setUint32(14, checksum, true);
+      view.setUint32(18, dataBytes.length, true);
+      view.setUint32(22, dataBytes.length, true);
+      view.setUint16(26, nameBytes.length, true);
+      view.setUint16(28, 0, true);
+      local.set(nameBytes, 30);
+      local.set(dataBytes, 30 + nameBytes.length);
+      chunks.push(local);
+
+      const central = new Uint8Array(46 + nameBytes.length);
+      const centralView = new DataView(central.buffer);
+      centralView.setUint32(0, 0x02014b50, true);
+      centralView.setUint16(4, 20, true);
+      centralView.setUint16(6, 20, true);
+      centralView.setUint16(8, 0, true);
+      centralView.setUint16(10, 0, true);
+      centralView.setUint16(12, 0, true);
+      centralView.setUint16(14, 0, true);
+      centralView.setUint32(16, checksum, true);
+      centralView.setUint32(20, dataBytes.length, true);
+      centralView.setUint32(24, dataBytes.length, true);
+      centralView.setUint16(28, nameBytes.length, true);
+      centralView.setUint16(30, 0, true);
+      centralView.setUint16(32, 0, true);
+      centralView.setUint16(34, 0, true);
+      centralView.setUint16(36, 0, true);
+      centralView.setUint32(38, 0, true);
+      centralView.setUint32(42, offset, true);
+      central.set(nameBytes, 46);
+      centralDirectory.push(central);
+      offset += local.length;
+    });
+
+    const centralStart = offset;
+    centralDirectory.forEach((entry) => {
+      chunks.push(entry);
+      offset += entry.length;
+    });
+
+    const end = new Uint8Array(22);
+    const endView = new DataView(end.buffer);
+    endView.setUint32(0, 0x06054b50, true);
+    endView.setUint16(8, files.length, true);
+    endView.setUint16(10, files.length, true);
+    endView.setUint32(12, offset - centralStart, true);
+    endView.setUint32(16, centralStart, true);
+    chunks.push(end);
+
+    return new Blob(chunks, { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+  }
+
+  function exportComparisonsXlsx() {
+    const rows = [
+      ["Configuration", "Fund", "Benchmark", "Scope", "Scenario", "Investment Amount", "Footprint", "Benchmark Footprint", "Delta", "Delta %", "Impact Estimate", "Benchmark Impact", "Coverage", "Benchmark Coverage"],
+      ...comparisonSet.map((item) => [
+        `${item.fund.shortName} vs ${item.benchmark.shortName}`,
+        item.fund.name,
+        item.benchmark.name,
+        item.scopeLabel,
+        item.scenarioLabel,
+        item.amount,
+        item.footprint,
+        item.benchmarkFootprint,
+        item.difference,
+        item.differencePct,
+        item.impact,
+        item.benchmarkImpact,
+        item.coverage,
+        item.benchmarkCoverage
+      ])
+    ];
+
+    const files = [
+      {
+        name: "[Content_Types].xml",
+        content: `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+  <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+  <Default Extension="xml" ContentType="application/xml"/>
+  <Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>
+  <Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>
+</Types>`
+      },
+      {
+        name: "_rels/.rels",
+        content: `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>
+</Relationships>`
+      },
+      {
+        name: "xl/workbook.xml",
+        content: `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  <sheets><sheet name="Comparisons" sheetId="1" r:id="rId1"/></sheets>
+</workbook>`
+      },
+      {
+        name: "xl/_rels/workbook.xml.rels",
+        content: `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>
+</Relationships>`
+      },
+      {
+        name: "xl/worksheets/sheet1.xml",
+        content: worksheetXml(rows)
+      }
+    ];
+
+    const blob = createZip(files);
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `ssim-esg-comparisons-${new Date().toISOString().slice(0, 10)}.xlsx`;
+    document.body.appendChild(link);
+    link.click();
+    URL.revokeObjectURL(link.href);
+    link.remove();
+  }
+
+  function setActiveButtons() {
+    scopeButtons.forEach((button) => {
+      button.classList.toggle("active", button.dataset.scope === selectedScope);
+    });
+    scenarioButtons.forEach((button) => {
+      button.classList.toggle("active", button.dataset.scenario === selectedScenario);
+    });
+  }
+
+  function currentSectorProfile() {
+    return sampleInteractiveData.sectorProfiles[selectedFund] || sampleInteractiveData.sectorProfiles.worldEsg;
+  }
+
+  function resetSectorWeights() {
+    activeSectorWeights = {};
+    currentSectorProfile().forEach((sector) => {
+      activeSectorWeights[sector.id] = sector.weight;
+    });
+  }
+
+  function normalizedSectorRows() {
+    const profile = currentSectorProfile();
+    const total = profile.reduce((sum, sector) => sum + (activeSectorWeights[sector.id] || 0), 0) || 1;
+    return profile.map((sector) => {
+      const rawWeight = activeSectorWeights[sector.id] || 0;
+      const normalizedWeight = rawWeight / total;
+      return {
+        ...sector,
+        rawWeight,
+        normalizedWeight,
+        normalizedPct: normalizedWeight * 100,
+        contribution: normalizedWeight * sector.carbon
+      };
+    });
+  }
+
+  function renderSectorSliders() {
+    sectorSliders.innerHTML = currentSectorProfile().map((sector) => `
+      <label class="sample-slider-row" for="sector-${sector.id}">
+        <span>${sector.label}</span>
+        <input id="sector-${sector.id}" type="range" min="0" max="40" step="1" value="${activeSectorWeights[sector.id] || 0}" data-sector="${sector.id}" />
+        <span id="sector-${sector.id}-value">${activeSectorWeights[sector.id] || 0}%</span>
+      </label>
+    `).join("");
+  }
+
+  function renderDonut(rows) {
+    const circumference = 2 * Math.PI * 72;
+    let offset = 0;
+    allocationDonut.innerHTML = rows.map((row) => {
+      const length = row.normalizedWeight * circumference;
+      const circle = `
+        <circle cx="95" cy="95" r="72" fill="none" stroke="${row.color}" stroke-width="24"
+          stroke-dasharray="${length} ${circumference - length}" stroke-dashoffset="${-offset}"
+          style="transition: stroke-dasharray 0.2s ease, stroke-dashoffset 0.2s ease"></circle>
+      `;
+      offset += length;
+      return circle;
+    }).join("");
+  }
+
+  function renderMiniBars(target, rows, options = {}) {
+    const max = Math.max(...rows.map((row) => row.value), 1);
+    target.innerHTML = rows.map((row) => `
+      <div class="mini-bar-row">
+        <span>${row.label}</span>
+        <span class="mini-bar-track"><span class="mini-bar-fill" style="width:${Math.max(2, (row.value / max) * 100)}%; background:${row.color || "var(--blue)"}"></span></span>
+        <span>${compact.format(row.value)}${options.suffix || "%"}</span>
+      </div>
+    `).join("");
+  }
+
+  function updateSampleExplorer() {
+    const rows = normalizedSectorRows();
+    const overlay = rows.reduce((sum, row) => sum + row.contribution, 0);
+    const maxContribution = Math.max(...rows.map((row) => row.contribution), 1);
+
+    rows.forEach((row) => {
+      const value = document.getElementById(`sector-${row.id}-value`);
+      if (value) {
+        value.textContent = `${compact.format(row.normalizedPct)}%`;
+      }
+    });
+
+    overlayCarbon.textContent = precise.format(overlay);
+    renderDonut(rows);
+    sectorCarbonBars.innerHTML = rows
+      .slice()
+      .sort((a, b) => b.contribution - a.contribution)
+      .map((row) => `
+        <div class="mini-bar-row">
+          <span>${row.label}</span>
+          <span class="mini-bar-track"><span class="mini-bar-fill" style="width:${Math.max(2, (row.contribution / maxContribution) * 100)}%; background:${row.color}"></span></span>
+          <span>${precise.format(row.contribution)}</span>
+        </div>
+      `).join("");
+  }
+
+  function renderStaticSampleCharts() {
+    renderMiniBars(rfactorBars, sampleInteractiveData.rFactorProfile);
+    renderMiniBars(productInvolvementBars, sampleInteractiveData.productInvolvement);
+  }
+
+  function updateScopeChart() {
+    const fund = ssgaSustainabilityMock.funds[selectedFund];
+    const order = ["scope1", "scope2", "scope3", "scope12"];
+    const entries = order.map((key) => fund.carbonFootprint[key]);
+    const max = Math.max(...entries.map((item) => item.portfolio));
+    const chart = document.getElementById("scope-chart");
+
+    chart.innerHTML = entries.map((item) => {
+      const width = Math.max(2, (item.portfolio / max) * 100);
+      return `
+        <div class="scope-row">
+          <span>${item.label}</span>
+          <span class="scope-track"><span class="scope-fill" style="width:${width.toFixed(1)}%"></span></span>
+          <span>${compact.format(item.portfolio)}</span>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function update() {
+    const fund = ssgaSustainabilityMock.funds[selectedFund];
+    const benchmark = ssgaSustainabilityMock.benchmarks[selectedBenchmark];
+    const base = fund.carbonFootprint[selectedScope];
+    const benchmarkBase = benchmark.carbonFootprint[selectedScope];
+    const scenario = scenarios[selectedScenario];
+    const metric = scenarioMetric(base, benchmarkBase);
+    const impact = (investmentAmount / 1000000) * metric.value;
+    const benchmarkImpact = (investmentAmount / 1000000) * benchmarkBase.benchmark;
+    const difference = metric.value - benchmarkBase.benchmark;
+    const differencePct = benchmarkBase.benchmark === 0 ? 0 : (difference / benchmarkBase.benchmark) * 100;
+    const comparisonMax = Math.max(metric.value, benchmarkBase.benchmark, 1);
+
+    document.getElementById("summary-period").textContent = fund.periodEnd;
+    document.getElementById("summary-fund").textContent = fund.shortName;
+    document.getElementById("summary-benchmark").textContent = benchmark.shortName;
+
+    document.getElementById("metric-footprint").textContent = precise.format(metric.value);
+    document.getElementById("metric-footprint-detail").textContent =
+      `${base.label} ${selectedScenario === "benchmark" ? "benchmark" : "portfolio"} metric`;
+    document.getElementById("metric-difference").textContent = `${difference >= 0 ? "+" : ""}${precise.format(difference)}`;
+    document.getElementById("metric-difference").className =
+      `metric-value ${difference < 0 ? "positive" : difference > 0 ? "negative" : "neutral"}`;
+    document.getElementById("metric-difference-detail").textContent =
+      `${differencePct >= 0 ? "+" : ""}${compact.format(differencePct)}% versus benchmark`;
+    document.getElementById("metric-coverage").textContent = `${precise.format(metric.coverage)}%`;
+    document.getElementById("metric-benchmark-coverage").textContent =
+      `Benchmark coverage ${precise.format(benchmarkBase.benchmarkCoverage)}%`;
+    document.getElementById("metric-risk-rating").textContent = precise.format(fund.climate.carbonRiskRating);
+    document.getElementById("metric-risk-detail").textContent =
+      `Benchmark ${precise.format(benchmark.climate.carbonRiskRating)} · low carbon transition score ${precise.format(fund.climate.lowCarbonTransitionScore)}`;
+
+    document.getElementById("impact-number").textContent = precise.format(impact);
+    document.getElementById("impact-copy").textContent =
+      `For a ${currency.format(investmentAmount)} investment in ${fund.shortName}, ${metric.label.toLowerCase()} maps to an estimated ` +
+      `${precise.format(impact)} tCO2e ${scenario.detail}. The equivalent benchmark-scaled estimate is ` +
+      `${precise.format(benchmarkImpact)} tCO2e against ${benchmark.shortName}.`;
+
+    document.getElementById("portfolio-bar-label").textContent = `${metric.label} · ${base.label}`;
+    document.getElementById("portfolio-bar-value").textContent = precise.format(metric.value);
+    document.getElementById("benchmark-bar-value").textContent = precise.format(benchmarkBase.benchmark);
+    document.getElementById("portfolio-bar").style.width = `${Math.max(2, (metric.value / comparisonMax) * 100)}%`;
+    document.getElementById("benchmark-bar").style.width = `${Math.max(2, (benchmarkBase.benchmark / comparisonMax) * 100)}%`;
+    const coverageStatus =
+      metric.coverage >= 90 ? "Very high coverage" :
+      metric.coverage >= 80 ? "High coverage" :
+      metric.coverage >= 65 ? "Moderate coverage" :
+      "Limited coverage";
+    document.getElementById("coverage-fill").style.width = `${metric.coverage}%`;
+    document.getElementById("coverage-marker").style.left = `${Math.max(0, Math.min(100, benchmarkBase.benchmarkCoverage))}%`;
+    document.getElementById("coverage-meter-text").textContent = `${precise.format(metric.coverage)}%`;
+    document.getElementById("coverage-status").textContent = coverageStatus;
+    document.getElementById("coverage-uncovered").textContent = `${precise.format(100 - metric.coverage)}%`;
+    document.getElementById("coverage-benchmark").textContent = `${precise.format(benchmarkBase.benchmarkCoverage)}%`;
+    document.getElementById("metric-temperature").innerHTML = `${precise.format(fund.climate.impliedTemperatureRise)}&deg;C`;
+    document.getElementById("temperature-detail").textContent =
+      benchmark.climate.impliedTemperatureRise === null
+        ? "Implied temperature rise is available for the portfolio in this mock dataset. Benchmark value is not available."
+        : `Benchmark implied temperature rise is ${precise.format(benchmark.climate.impliedTemperatureRise)}°C.`;
+
+    setActiveButtons();
+  }
+
+  amountInput.addEventListener("input", (event) => {
+    investmentAmount = parseAmount(event.target.value);
+    update();
+  });
+
+  amountInput.addEventListener("blur", () => {
+    amountInput.value = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(investmentAmount);
+  });
+
+  fundSelect.addEventListener("change", (event) => {
+    selectedFund = event.target.value;
+    resetSectorWeights();
+    renderSectorSliders();
+    updateSampleExplorer();
+    updateScopeChart();
+    update();
+  });
+
+  benchmarkSelect.addEventListener("change", (event) => {
+    selectedBenchmark = event.target.value;
+    update();
+  });
+
+  scopeButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      selectedScope = button.dataset.scope;
+      update();
+    });
+  });
+
+  scenarioButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      selectedScenario = button.dataset.scenario;
+      update();
+    });
+  });
+
+  sectorSliders.addEventListener("input", (event) => {
+    if (!event.target.matches("input[type='range']")) {
+      return;
+    }
+    activeSectorWeights[event.target.dataset.sector] = Number(event.target.value);
+    updateSampleExplorer();
+  });
+
+  addComparisonButton.addEventListener("click", addCurrentComparison);
+
+  exportComparisonsButton.addEventListener("click", exportComparisonsXlsx);
+
+  resetComparisonsButton.addEventListener("click", resetComparisonExamples);
+
+  clearComparisonsButton.addEventListener("click", () => {
+    comparisonSet = [];
+    renderComparisonSet();
+  });
+
+  comparisonBody.addEventListener("click", (event) => {
+    if (!event.target.matches(".remove-compare")) {
+      return;
+    }
+    comparisonSet = comparisonSet.filter((_, index) => index !== Number(event.target.dataset.index));
+    renderComparisonSet();
+  });
+
+  populateSelectors();
+  resetSectorWeights();
+  renderSectorSliders();
+  renderStaticSampleCharts();
+  updateSampleExplorer();
+  updateScopeChart();
+  update();
+  resetComparisonExamples();
+})();
+</script>
+</body>
+</html>
